@@ -1,29 +1,27 @@
-//TODO: done - Step 6 - import the story.dart file into this file.
-
 import 'story.dart';
 
-//TODO: done - Step 5 - Create a new class called StoryBrain.
 
 class StoryBrain {
 
-  //TODO: Step 16 - Create a property called storyNumber which starts with a value of 0. This will be used to track which story the user is currently viewing.
   int storyNumber = 0;
 
   String getStory(){
-    return _storyData[0].storyTitle;
+    return _storyData[storyNumber].storyTitle;
   }
-//TODO: Step 11 - Create a method called getChoice1() that returns the text for the first choice1 from _storyData.
 
   String getChoice1(){
-    return _storyData[0].choice1;
+    return _storyData[storyNumber].choice1;
   }
 
   String getChoice2(){
-    return _storyData[0].choice2;
+    return _storyData[storyNumber].choice2;
   }
 
-  //TODO: Step 17 - Create a method called nextStory(), it should not have any outputs but it should have 1 input called choiceNumber which will be the choice number (int) made by the user.
-  // choiceNumber originnaly userChoice
+  void restart(){
+    storyNumber = 0;
+  }
+
+  // choiceNumber originally userChoice
   void nextStory(int choiceNumber){
     if(choiceNumber == 1 && storyNumber == 0){
       storyNumber = 2;
@@ -43,10 +41,33 @@ class StoryBrain {
     else if (choiceNumber == 2 && storyNumber == 1){
       storyNumber = 3;
     }
+    else if (storyNumber == 3 || storyNumber == 4 || storyNumber == 5){
+      restart();
+    }
   }
 
+  //more elegant solution for this above:
 
-//TODO: done Step 7 - Uncomment the lines below to include storyData as a private property in StoryBrain. Hint: You might need to change something in story.dart to make this work.
+  /*void nextStory(int choiceNumber) {
+    switch (_storyNumber) {
+      case 0:
+        _storyNumber = choiceNumber == 1 ? 2 : 1;
+        break;
+      case 1:
+        _storyNumber = choiceNumber == 1 ? 2 : 3;
+        break;
+      case 2:
+        _storyNumber = choiceNumber == 1 ? 5 : 4;
+        break;
+      case 3:
+      case 4:
+      case 5:
+        restart();
+    }
+  }
+
+  */
+
 
 List<Story> _storyData = [
  Story(
